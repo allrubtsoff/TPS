@@ -128,4 +128,32 @@ void ATPSCharacter::MovementTick(float DeltaTime)
 
 }
 
+void ATPSCharacter::CharacterUpdate()
+{
+	float ResSpeed = 600.0f;
+	switch (MovementState)
+	{
+	case EMovementState::Aim_State:
+		ResSpeed = MovementInfo.AimSpeed;
+		break;
+	case EMovementState::Walk_State:
+		ResSpeed = MovementInfo.WalkSpeed;
+		break;
+	case EMovementState::Run_State:
+		ResSpeed = MovementInfo.RunSpeed;
+		break;
+	default:
+		break;
+	}
+
+	GetCharacterMovement()->MaxWalkSpeed = ResSpeed;
+
+}
+
+void ATPSCharacter::ChangeMovementState(EMovementState NewMovementState)
+{
+	MovementState = NewMovementState;
+	CharacterUpdate();
+}
+
 
